@@ -1,14 +1,14 @@
 # Views
 
-- [Creating Views](#creating-views)
+- [View file များဖန်တီးခြင်း](#creating-views)
 - [Passing Data To Views](#passing-data-to-views)
     - [Sharing Data With All Views](#sharing-data-with-all-views)
 - [View Composers](#view-composers)
 
 <a name="creating-views"></a>
-## Creating Views
+## View file များဖန်တီးခြင်း
 
-Views contain the HTML served by your application and separate your controller / application logic from your presentation logic. Views are stored in the `resources/views` directory. A simple view might look something like this:
+View file တွေမှာ သင့် applicationမှ ပြသချင်တဲ့ Html တွေပါဝင်ပြီး သင့်ရဲ့ presentation logic တွေကို controller(သို့)application logic တွေနဲ့ ခွဲခြားပေးပါတယ်။ View file တွေကို `resources/views` folder လမ်းကြောင်းအောက်မှာ သိမ်းထားပါတယ်။ နမူနာ view တစ်ခုကို အောက်မှာပြထားပါတယ်။
 
     <!-- View stored in resources/views/greeting.php -->
 
@@ -18,21 +18,22 @@ Views contain the HTML served by your application and separate your controller /
         </body>
     </html>
 
-Since this view is stored at `resources/views/greeting.php`, we may return it using the global `view` helper like so:
+ထို view file ကို `resources/views/greeting.php` လမ်းကြောင်းအောက်မှာသိမ်းထားပြီးလျှင် global `view` helper ကို အသုံးပြုကာ အောက်ပါအတိုင်း return ပြန်ပေးနိုင်ပါတယ်။
 
     Route::get('/', function () {
         return view('greeting', ['name' => 'James']);
     });
 
-As you can see, the first argument passed to the `view` helper corresponds to the name of the view file in the `resources/views` directory. The second argument is an array of data that should be made available to the view. In this case, we are passing the `name` variable, which is displayed in the view using [Blade syntax](/docs/{{version}}/blade).
+သင်မြင်ရတဲ့ အတိုင်းပါပဲ `view` helper ထဲကို ပေးလိုက်တဲ့ ပထမ argument က  `resources/views`လမ်းကြောင်းအောက်မှာရှိတဲ့ view file ရဲ့ fileနာမည် ဖြစ်ပါတယ်။
+ဒုတိယ argument ကတော့ view file မှာပြန်အသုံးပြုနိုင်တဲ့ data တွေပါဝင်တဲ့ array ဖြစ်ပါတယ်။ ယခု နမူနာမှာတော့ ကျွန်တော်တို့ဟာ `name` ဆိုတဲ့ variable တစ်ခုကို ထည့်ပေးလိုက်ပြီးတော့ view file မှာ [Blade syntax](/docs/{{version}}/blade) ကိုအသုံးပြုပြီး ပြန်လည်ထုတ်ပြထားပါတယ်။
 
-Of course, views may also be nested within sub-directories of the `resources/views` directory. "Dot" notation may be used to reference nested views. For example, if your view is stored at `resources/views/admin/profile.php`, you may reference it like so:
+view file တွေကို `resources/views` လမ်းကြောင်းအောက်မှာ folder အဆင့်ဆင့် ခွဲပြီး သိမ်းလို့ရပါတယ်။  "Dot" သင်္ကေတဖြင့် အဆင့်ဆင့်ခွဲပြီးသိမ်းထားတဲ့ view file တွေကိုညွှန်ပြနိုင်ပါတယ်။ ဥပမာ သင့်ရဲ့ view file ကို `resources/views/admin/profile.php` လမ်းကြောင်းအတိုင်းသိမ်းထားမည်ဆိုလျှင် အောက်ပါအတိုင်း ပြန်ခေါ်နိုင်ပါတယ်။
 
     return view('admin.profile', $data);
 
-#### Determining If A View Exists
+#### view file ရှိ မရှိ စစ်ဆေးခြင်း
 
-If you need to determine if a view exists, you may use the `View` facade. The `exists` method will return `true` if the view exists:
+အကယ်လို့ view file ရှိမရှိစစ်ဆေးဖို့လိုလာလျှင် `View` facade ကို အသုံးပြုနိုင်ပါတယ်။ view file သာရှိနေခဲ့မည်ဆိုလျှင်  `exists` method က `true` return ပြန်ပေးမှာဖြစ်ပါတယ်။
 
     use Illuminate\Support\Facades\View;
 
